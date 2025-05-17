@@ -1,3 +1,21 @@
+function addLineBreaks() {
+    const aikenInput = document.getElementById('aikenInput').value;
+    const lines = aikenInput.split('\n');
+    let processedLines = [];
+    for (let i = 0; i < lines.length; i++) {
+        let line = lines[i];
+        let siguiente = lines[i + 1];
+        if (line.startsWith("ANSWER:") && siguiente !='') {
+            processedLines.push(line);
+            processedLines.push(''); // Add a blank line after the answer
+        }else processedLines.push(line);
+    }
+      document.getElementById('iliasOutput').textContent = processedLines.join('\n');
+    document.getElementById('iliasOutput').style.display = 'block';
+  }
+
+
+
 function convertAikenToILIAS() {
     const aikenInput = document.getElementById('aikenInput').value;
     const errorMessageElement = document.getElementById('error-message');
@@ -13,7 +31,7 @@ function convertAikenToILIAS() {
         const isNewQuestion = (i === 0 || lines[i - 1] === '') &&  // Added check for previous line
                               line.length > 0 &&
                               !line.startsWith(' ') &&
-                              (line.match(/^[0-9]+\.\s/) || line.match(/^[a-zA-Z]+\)\s/) || line.match(/^[a-zA-Z]\.\s/));
+                              (line.match(/^[0-9]+\.\s/) || line.match(/^[a-zA-Z]+\)\s/) || line.match(/^[a-zA-Z]\.\s/) || line.match(/^[0-9]+\.+[0-9]/) || line.match(/^[0-9]+\.+[0-9]+[0-9]/));
 
         if (isNewQuestion && currentQuestion.length > 0) {
             if (processedAiken.length > 0 && processedAiken[processedAiken.length - 1] !== '') {
@@ -58,7 +76,7 @@ function convertAikenToILIAS() {
             continue;
         }
 
-        questionTitle = lines.find(line => line.length > 0 && !line.startsWith(' ') && (line.match(/^[0-9]+\.\s/) || line.match(/^[a-zA-Z]+\)\s/) || line.match(/^[a-zA-Z]\.\s/))) || lines[0];
+        questionTitle = lines.find(line => line.length > 0 && !line.startsWith(' ') && (line.match(/^[0-9]+\.\s/) || line.match(/^[a-zA-Z]+\)\s/) || line.match(/^[a-zA-Z]\.\s/) || line.match(/^[0-9]+\.+[0-9]/) || line.match(/^[0-9]+\.+[0-9]+[0-9]/))) || lines[0];
 
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i];
@@ -107,7 +125,7 @@ function convertAikenToILIAS() {
         </qtimetadatafield>
         <qtimetadatafield>
           <fieldlabel>AUTHOR</fieldlabel>
-          <fieldentry>TIQI - The ILIAS Question Importer (JS AIKEN)</fieldentry>
+          <fieldentry>Diego (JS AIKEN)</fieldentry>
         </qtimetadatafield>
         <qtimetadatafield>
           <fieldlabel>textgaprating</fieldlabel>
