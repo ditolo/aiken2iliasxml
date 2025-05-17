@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertidor AIKEN a ILIAS XML</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        textarea { width: 100%; min-height: 200px; margin-bottom: 10px; }
+        button { padding: 10px 20px; cursor: pointer; }
+        #output { margin-top: 20px; border: 1px solid #ccc; padding: 10px; white-space: pre-wrap; }
+        .error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Convertidor AIKEN a ILIAS XML</h1>
+    <div>
+        <label for="aikenInput">Introduce las preguntas en formato AIKEN:</label><br>
+        <textarea id="aikenInput" placeholder="Ejemplo:
+Pregunta 1
+A. Opción A
+B. Opción correcta
+C. Opción C
+ANSWER: B
+
+Pregunta 2
+Texto de la segunda pregunta
+a) respuesta a
+b) respuesta b
+c) respuesta correcta
+ANSWER: c"></textarea><br>
+        <button onclick="convertAikenToILIAS()">Convertir a ILIAS XML</button>
+        <p id="error-message" class="error" style="display:none;">Error: Por favor, revisa el formato de las preguntas.</p>
+    </div>
+
+    <div id="output">
+        <h2>Resultado ILIAS XML:</h2>
+        <button id="downloadButton" style="display:none;" onclick="downloadXML()">Descargar XML</button>
+        <pre id="iliasOutput"></pre>
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
